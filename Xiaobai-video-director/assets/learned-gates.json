@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "sources": [
+    {
+      "scope": "core",
+      "path": "core-learned-gates.json"
+    },
+    {
+      "scope": "profile",
+      "profile": "knowledge-explainer",
+      "path": "../profiles/knowledge-explainer/learned-gates.json"
+    }
+  ]
+}

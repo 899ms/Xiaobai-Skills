@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "id": "cache-reading-world",
+  "safeArea": [
+    50,
+    190,
+    1820,
+    690
+  ],
+  "background": "#f4f1e9",
+  "actorColors": [
+    "#f1b646",
+    "#197e70"
+  ],
+  "nodes": {
+    "app": {
+      "kind": "application",
+      "label": "应用",
+      "meaning": "接收商品价格读取请求的应用容器",
+      "visibleEvent": "showApp",
+      "origin": [
+        420,
+        560
+      ],
+      "artworkBox": [
+        290,
+        450,
+        260,
+        220
+      ],
+      "labelBox": [
+        360,
+        695,
+        120,
+        44
+      ],
+      "avoidBoxes": [
+        [
+          290,
+          450,
+          260,
+          220
+        ]
+      ],
+      "receptors": {
+        "inbox": [
+          360,
+          500,
+          120,
+          120
+        ]
+      }
+    },
+    "cache": {
+      "kind": "cache-drawer",
+      "label": "缓存",
+      "meaning": "保存重复读取结果的缓存",
+      "visibleEvent": "showCache",
+      "origin": [
+        950,
+        520
+      ],
+      "artworkBox": [
+        820,
+        464,
+        260,
+        202
+      ],
+      "labelBox": [
+        890,
+        695,
+        120,
+        44
+      ],
+      "avoidBoxes": [
+        [
+          820,
+          464,
+          260,
+          202
+        ]
+      ],
+      "receptors": {
+        "query": [
+          890,
+          500,
+          120,
+          120
+        ]
+      }
+    },
+    "database": {
+      "kind": "database",
+      "label": "数据库",
+      "meaning": "保存商品价格的数据库",
+      "visibleEvent": "showDatabase",
+      "origin": [
+        1510,
+        520
+      ],
+      "artworkBox": [
+        1394,
+        407,
+        232,
+        275
+      ],
+      "labelBox": [
+        1430,
+        695,
+        160,
+        44
+      ],
+      "avoidBoxes": [
+        [
+          1394,
+          407,
+          232,
+          275
+        ]
+      ],
+      "receptors": {
+        "query": [
+          1450,
+          500,
+          120,
+          120
+        ]
+      }
+    }
+  },
+  "actor": {
+    "id": "read-request",
+    "meaning": "商品价格读取请求",
+    "size": [
+      110,
+      104
+    ],
+    "laneY": 560,
+    "poses": {
+      "appSpawn": [
+        420,
+        560
+      ],
+      "appPort": [
+        420,
+        560
+      ],
+      "cache": [
+        950,
+        560
+      ],
+      "databasePort": [
+        1510,
+        560
+      ],
+      "outsideApp": [
+        170,
+        560
+      ],
+      "appInbox": [
+        420,
+        560
+      ]
+    },
+    "fillColors": [
+      "#fff0c6",
+      "#d8eee8"
+    ],
+    "minVisibleFillRatio": 0.58,
+    "laneLock": true
+  },
+  "paths": [
+    {
+      "from": "appInbox",
+      "to": "cache"
+    },
+    {
+      "from": "cache",
+      "to": "databasePort"
+    }
+  ]
+}

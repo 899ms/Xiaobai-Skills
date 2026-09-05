@@ -1,0 +1,186 @@
+{
+  "version": 4,
+  "profile": "knowledge-explainer",
+  "segment": {
+    "startSec": 0,
+    "endSec": 2,
+    "fps": 30
+  },
+  "rules": {
+    "maxForegroundObjects": 1,
+    "minGapPx": 60,
+    "requireClearEnd": true,
+    "requireAttentionContract": true,
+    "requireInternalRevealContract": true,
+    "requireContainmentContract": true,
+    "requireContinuityContract": true,
+    "requireMotionContract": true,
+    "requireTextSlotContract": true,
+    "requireProgressiveRevealContract": true,
+    "requireEvidenceCoverage": true,
+    "requireSemanticBindingContract": true,
+    "requireStateTransitionContract": true,
+    "requireRelationContract": true,
+    "requireArtworkTextCollisionContract": true,
+    "requireFeedbackRegressionContract": true,
+    "requireCausalTransitionContract": true
+  },
+  "appliedLearnings": [
+    "verb-visible-evidence",
+    "progressive-reveal",
+    "complete-exit",
+    "label-artwork-separation",
+    "semantic-motion-destination",
+    "continuous-state-world",
+    "container-and-spacing",
+    "context-neutrality",
+    "transition-variety-with-purpose",
+    "single-meaning-object",
+    "exact-spoken-label-binding",
+    "direct-metaphor",
+    "typed-object-relations",
+    "state-derived-result",
+    "attention-isolation",
+    "causal-transition-process",
+    "executable-world-model",
+    "actor-layer-visibility",
+    "semantic-motion-endpoints",
+    "horizontal-lane-consistency"
+  ],
+  "objects": [
+    {
+      "id": "agent",
+      "meaning": "执行当前任务的 AI",
+      "spokenTerm": "AI",
+      "onScreenLabel": null,
+      "states": [
+        "idle",
+        "active"
+      ],
+      "form": "单一机器人对象",
+      "role": "actor",
+      "persistence": "temporary",
+      "firstBeat": "ai",
+      "internalReveals": [],
+      "receptors": [],
+      "textSlots": []
+    }
+  ],
+  "beats": [
+    {
+      "id": "ai",
+      "at": 0.2,
+      "settleSec": 0.4,
+      "anchorType": "speech",
+      "spoken": "AI 开始执行任务",
+      "hero": "agent",
+      "continuity": "reset",
+      "attention": {
+        "mode": "isolated",
+        "support": []
+      },
+      "semantic": {
+        "kind": "transform",
+        "subject": "agent",
+        "verb": "开始执行",
+        "object": null,
+        "result": "机器人进入执行状态"
+      },
+      "stateChanges": [
+        {
+          "object": "agent",
+          "from": "idle",
+          "to": "active",
+          "evidence": "机器人亮起并进入执行状态"
+        }
+      ],
+      "transition": {
+        "trigger": "口播说 AI 开始执行",
+        "processKind": "morph",
+        "processEvidence": "机器人由静止轮廓逐步亮起并进入工作姿态",
+        "settled": "机器人保持完整的执行状态"
+      },
+      "relations": [],
+      "action": "机器人进入执行状态",
+      "appears": [
+        "agent"
+      ],
+      "exits": [],
+      "exitModes": {},
+      "contains": [],
+      "layout": {
+        "agent": [
+          420,
+          420,
+          160,
+          230
+        ]
+      },
+      "textLayout": {},
+      "motions": []
+    },
+    {
+      "id": "clear",
+      "at": 1.2,
+      "settleSec": 0.4,
+      "anchorType": "sentence-end",
+      "spoken": "任务说明结束",
+      "hero": "agent",
+      "continuity": "continue",
+      "attention": {
+        "mode": "isolated",
+        "support": []
+      },
+      "semantic": {
+        "kind": "clear",
+        "subject": "agent",
+        "verb": "退出",
+        "object": null,
+        "result": "机器人完整离开画面"
+      },
+      "stateChanges": [],
+      "transition": null,
+      "relations": [],
+      "action": "机器人完整离开画面",
+      "appears": [],
+      "exits": [
+        "agent"
+      ],
+      "exitModes": {
+        "agent": "offscreen"
+      },
+      "contains": [],
+      "layout": {},
+      "textLayout": {},
+      "motions": [
+        {
+          "object": "agent",
+          "kind": "discard",
+          "destination": "offscreen",
+          "result": "机器人完整离屏",
+          "path": [
+            [
+              420,
+              420,
+              160,
+              230
+            ],
+            [
+              1100,
+              420,
+              160,
+              230
+            ],
+            [
+              1940,
+              420,
+              160,
+              230
+            ]
+          ],
+          "landingZone": null
+        }
+      ]
+    }
+  ]
+}

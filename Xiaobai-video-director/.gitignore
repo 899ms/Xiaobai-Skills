@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+!.env.render
+.local/
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+runs/
+.DS_Store
+*.log

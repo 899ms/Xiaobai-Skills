@@ -1,0 +1,53 @@
+{
+  "text": "让AI替你做事",
+  "profile": {
+    "TTS_PROTOCOL": "tencent_speech",
+    "TTS_BASE_URL": "https://tts.tencentcloudapi.com",
+    "TTS_MODEL": "1",
+    "TTS_VOICE_ID": "1001",
+    "TTS_SPEED": 1.1,
+    "PLAYBACK_RATE": 0.92,
+    "TTS_LANGUAGE": "zh-CN",
+    "preprocessing": "cjk-latin-padding-v1",
+    "sample_rate": 16000,
+    "codec": "mp3"
+  },
+  "alignment": {
+    "source": "provider_native",
+    "granularity": "word",
+    "spans": [
+      {
+        "text": "让",
+        "start_ms": 250,
+        "end_ms": 495
+      },
+      {
+        "text": "AI",
+        "start_ms": 495,
+        "end_ms": 851
+      },
+      {
+        "text": "替",
+        "start_ms": 851,
+        "end_ms": 1028
+      },
+      {
+        "text": "你",
+        "start_ms": 1028,
+        "end_ms": 1162
+      },
+      {
+        "text": "做",
+        "start_ms": 1162,
+        "end_ms": 1340
+      },
+      {
+        "text": "事",
+        "start_ms": 1340,
+        "end_ms": 1562
+      }
+    ]
+  },
+  "audio_sha256": "a4ea310ebd45f33ea6f0b159b9afa3fa7f4f86df07ce14c063b6669f4ce56b0f",
+  "provenance": "Generic synthetic Tencent TTS phrase for offline regression tests; not a user voice approval or private project recording."
+}

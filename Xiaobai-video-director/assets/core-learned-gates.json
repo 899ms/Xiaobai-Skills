@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "scope": "core",
+  "rules": [
+    {
+      "id": "verb-visible-evidence",
+      "symptom": "找、猜、修改、保存等动词只对应淡入或静态摆放",
+      "rule": "每个动作 beat 必须有位移、内部揭示或状态变化作为可见证据",
+      "enforcement": "gate+release",
+      "v2Review": "score-review+score-release"
+    },
+    {
+      "id": "progressive-reveal",
+      "symptom": "未讲到的模块提前以低透明度出现，或同一时刻堆入多个对象",
+      "rule": "对象与内部状态在对应口播首次出现；每 beat 最多新增一个前景对象",
+      "enforcement": "gate+release",
+      "v2Review": "score-review+score-release"
+    },
+    {
+      "id": "complete-exit",
+      "symptom": "对象只下移、缩小或半透明，下一场景仍能看到残片",
+      "rule": "退出对象必须离屏、收拢、碎裂或变形成明确对象，并在动作完成后卸载",
+      "enforcement": "gate+release",
+      "v2Review": "score-review+score-release"
+    },
+    {
+      "id": "label-artwork-separation",
+      "symptom": "文字卡在描边、图标或底线上，既不在对象内也不在对象外",
+      "rule": "每个文字槽声明位置与图形避让区；文字盒不得与避让区相交。数字、单位和合计值也属于文字槽，检查变化的起点、中间与落定帧，禁止程序浮点尾数；无语义的装饰线不得穿过数字或单位，优先删去装饰。",
+      "enforcement": "gate+release",
+      "v2Review": "score-review+score-release",
+      "regression": "scripts/check_score_render.py：执行实际共享 JSX，检查浮点尾数与水平装饰穿字；score-render 必跑，失败不渲染。曲线、复杂遮挡和所有实片文字仍由 score-review/score-release 复核。"
+    },
+    {
+      "id": "semantic-motion-destination",
+      "symptom": "对象移动或缩小却没有可理解的目的地",
+      "rule": "保存、合并和交接必须进入可见接收对象；普通位移必须写清动作结果",
+      "enforcement": "gate+release",
+      "v2Review": "score-review+score-release"
+    },
+    {
+      "id": "continuous-state-world",
+      "symptom": "场景频繁替换，前后对象没有继承关系，像逐页播放 PPT",
+      "rule": "同一语义段延续同一主体；换场必须声明交接，重置只允许在句末",
+      "enforcement": "gate+release",
+      "v2Review": "score-review+score-release"
+    },
+    {
+      "id": "container-and-spacing",
+      "symptom": "卡片被容器遮挡、对象互相覆盖或贴边",
+      "rule": "稳定帧为所有对象声明边界框、容器留白和安全间距",
+      "enforcement": "gate+release",
+      "v2Review": "score-review+score-release"
+    },
+    {
+      "id": "context-neutrality",
+      "symptom": "单条视频无材料依据地带入支付、回调等系列背景",
+      "rule": "只使用材料和当前叙事明确提供的领域背景",
+      "enforcement": "qa-gate+release",
+      "v2Review": "score-review+score-release"
+    },
+    {
+      "id": "transition-variety-with-purpose",
+      "symptom": "连续场景都用同方向推入推出，形成机械和审美疲劳",
+      "rule": "转场由语义决定，可交接、折叠、替换或局部聚焦；不得为了变化加入无意义运动",
+      "enforcement": "qa-gate+release",
+      "v2Review": "score-review+score-release"
+    },
+    {
+      "id": "executable-world-model",
+      "symptom": "状态表描述正确，但 React 重新生成坐标和时间后仍发生抢跑、遮挡或裁切",
+      "rule": "新视频只使用 score.json v2；编译器产生逐帧状态，受控 Remotion 直接消费。原生音轨、模型、渲染器、混音和视频绑定哈希，修改后旧验收失效。旧声明式 release 禁止交付。",
+      "enforcement": "world-gate+frame-gate+release",
+      "v2Review": "score-review+score-release"
+    },
+    {
+      "id": "actor-layer-visibility",
+      "symptom": "主角沿路径运动时被后绘制的节点遮挡，只从边角露出或像在错误图层穿行",
+      "rule": "主角必须在路径和普通节点之上完整可见；只有进入已声明容器时才允许由前景遮罩产生有含义的遮挡",
+      "enforcement": "frame-gate+release",
+      "v2Review": "score-review+score-release"
+    },
+    {
+      "id": "semantic-motion-endpoints",
+      "symptom": "口播说对象来到某节点，画面却停在节点外侧或向外移动",
+      "rule": "arrive 的终点必须进入目标接收区；transfer 的起点与终点必须分别位于来源和目标接收区。流转前不应为了构图让主角先多绕一次：主角可先位于来源，用镜头展开关系后再流转。确需预先移动时必须有独立语义或注意力理由，并复核移动前、途中、落定的连续片段；无理由的往返返工。",
+      "enforcement": "world-gate+release",
+      "v2Review": "score-review+score-release",
+      "regression": "score-check 检查来源、目的地和位置连续；多余位移的语义不能仅靠坐标判断，必须在 semantic-motion-endpoints 的实际观察中说明，否则 score-release 阻断。"
+    },
+    {
+      "id": "horizontal-lane-consistency",
+      "symptom": "同一条逻辑链上的对象沿斜线移动，节点与连线高低不一",
+      "rule": "声明 laneLock 的主角、节点接收区和连线必须共享 laneY；节点视觉中心围绕 laneY 对齐，标签共用同一基线；复制结果时让主角继续沿线移动，只在容器内部留下副本",
+      "enforcement": "world-gate+frame-gate+release",
+      "v2Review": "score-review+score-release"
+    }
+  ]
+}

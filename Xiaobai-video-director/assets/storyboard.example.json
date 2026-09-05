@@ -1,0 +1,42 @@
+{
+  "id": "queue-example",
+  "title": "请求怎样有序处理",
+  "focus": {
+    "question": "请求进入队列后怎样轮到处理",
+    "viewer_takeaway": "在这个演示模型中，请求按进入顺序等待和处理",
+    "visual_subject": "带同一颜色标识的请求对象"
+  },
+  "sources": [
+    {
+      "id": "demo-spec",
+      "excerpt": "自拟演示模型：一个处理器按先到先服务顺序处理请求；处理器忙时，新的请求排队等待。"
+    }
+  ],
+  "beats": [
+    {
+      "id": "enter",
+      "text": "请求到达时，处理器正在忙。",
+      "visual": "先展示正在处理的蓝色请求；黄色新请求进入画面，停在处理器外。",
+      "source_refs": ["demo-spec"],
+      "is_example": true
+    },
+    {
+      "id": "wait",
+      "text": "新的请求先进入队列，等待轮到自己。",
+      "visual": "讲到队列时再展开等待位置；黄色请求沿路径进入第一个空位。",
+      "source_refs": ["demo-spec"],
+      "is_example": true
+    },
+    {
+      "id": "process",
+      "text": "前一项处理完成，它再向前移动。",
+      "visual": "蓝色请求完成并离开；黄色请求保持身份，移动到处理器中。",
+      "source_refs": ["demo-spec"],
+      "is_example": true
+    }
+  ],
+  "anchors": {
+    "queue_reveal": "进入队列",
+    "move_forward": "向前移动"
+  }
+}

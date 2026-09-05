@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "profile": "knowledge-explainer",
+  "narrativeSpine": "跟随一条请求，看它如何进入队列、等待并被处理",
+  "voiceProfileHash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "choicePoints": [
+    {
+      "id": "focus",
+      "kind": "focus",
+      "materiallyDifferent": false,
+      "unresolved": false,
+      "preferenceKnown": true,
+      "options": [],
+      "recommendation": "解释请求在有限队列中的完整流转",
+      "reason": "用户已明确聚焦消息队列"
+    },
+    {
+      "id": "voice",
+      "kind": "voice",
+      "materiallyDifferent": true,
+      "unresolved": true,
+      "preferenceKnown": false,
+      "options": ["沉稳解说男声", "自然聊天男声", "清晰资讯女声"],
+      "recommendation": "沉稳解说男声",
+      "reason": "示例假设尚未建立长期默认音色；呈现问题前须先为候选项生成试听"
+    }
+  ],
+  "segments": [
+    {
+      "id": "arrival",
+      "structure": "mechanism-flow",
+      "sameWorld": false,
+      "sameSubject": false,
+      "focusChanged": false,
+      "worldChanged": false,
+      "timeChanged": false,
+      "subjectHandoff": false,
+      "evidence": "第一段建立请求、队列和处理器所在的连续空间"
+    },
+    {
+      "id": "wait",
+      "structure": "mechanism-flow",
+      "sameWorld": true,
+      "sameSubject": true,
+      "focusChanged": true,
+      "worldChanged": false,
+      "timeChanged": false,
+      "subjectHandoff": false,
+      "evidence": "仍跟随同一个请求，只把注意力从入口移到等待位置"
+    },
+    {
+      "id": "processor",
+      "structure": "mechanism-flow",
+      "sameWorld": true,
+      "sameSubject": false,
+      "focusChanged": true,
+      "worldChanged": false,
+      "timeChanged": false,
+      "subjectHandoff": true,
+      "evidence": "请求从队列交给处理器，主体发生可见交接"
+    }
+  ]
+}

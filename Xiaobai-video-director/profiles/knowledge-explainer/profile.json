@@ -1,0 +1,16 @@
+{
+  "id": "knowledge-explainer",
+  "version": 1,
+  "maturity": "tuning",
+  "outcome": "把跨领域知识材料制作成降低理解成本的讲解视频",
+  "explanationStructures": [
+    {"id": "mechanism-flow", "meaning": "机制流程", "visualGrammar": "连续空间、对象流转、镜头追踪"},
+    {"id": "abstract-concept", "meaning": "抽象概念", "visualGrammar": "具体隐喻、单义对象、状态变化"},
+    {"id": "cause-tradeoff", "meaning": "因果取舍", "visualGrammar": "原因、约束、选择与后果的可见关系"},
+    {"id": "data-trend", "meaning": "数据趋势", "visualGrammar": "数字、比例与时间变化形成视觉证据"},
+    {"id": "case-narrative", "meaning": "案例叙事", "visualGrammar": "角色、事件和时间线推进"}
+  ],
+  "userDecisionKinds": ["focus", "story-angle", "voice", "visual-language", "capability-approval"],
+  "maxAutoRepairRounds": 2,
+  "graduationRequiresHoldout": true
+}

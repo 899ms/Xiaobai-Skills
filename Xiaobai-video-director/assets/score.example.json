@@ -1,0 +1,940 @@
+{
+  "score": {
+    "version": 2,
+    "title": "一空一多 怎样对冲",
+    "objects": {
+      "left": {
+        "label": "永续合约",
+        "noun": "永续合约",
+        "shape": "market",
+        "color": "red",
+        "box": [
+          340,
+          405,
+          420,
+          315
+        ],
+        "labelPlacement": "above",
+        "receiver": [
+          90,
+          145,
+          240,
+          140
+        ],
+        "value": {
+          "field": "leftPrice",
+          "suffix": " 美元",
+          "showField": "showLeft"
+        },
+        "layer": 0
+      },
+      "right": {
+        "label": "现货",
+        "noun": "现货",
+        "shape": "market",
+        "color": "teal",
+        "box": [
+          1160,
+          405,
+          420,
+          315
+        ],
+        "labelPlacement": "above",
+        "receiver": [
+          90,
+          145,
+          240,
+          140
+        ],
+        "value": {
+          "field": "rightPrice",
+          "suffix": " 美元",
+          "showField": "showRight"
+        },
+        "layer": 0
+      },
+      "robot": {
+        "label": "机器人",
+        "noun": "机器人",
+        "shape": "robot",
+        "color": "ink",
+        "box": [
+          830,
+          390,
+          260,
+          330
+        ],
+        "labelPlacement": "above",
+        "receiver": [
+          10,
+          160,
+          240,
+          140
+        ],
+        "layer": 0
+      },
+      "short": {
+        "label": "空单",
+        "noun": "空单",
+        "shape": "ticket",
+        "color": "red",
+        "box": [
+          870,
+          570,
+          180,
+          100
+        ],
+        "labelPlacement": "inside",
+        "value": {
+          "field": "shortPnl",
+          "suffix": " 美元",
+          "signed": true,
+          "showField": "showShortPnl"
+        },
+        "statusField": "shortPosition",
+        "layer": 3
+      },
+      "long": {
+        "label": "多单",
+        "noun": "多单",
+        "shape": "ticket",
+        "color": "teal",
+        "box": [
+          870,
+          570,
+          180,
+          100
+        ],
+        "labelPlacement": "inside",
+        "value": {
+          "field": "longPnl",
+          "suffix": " 美元",
+          "signed": true,
+          "showField": "showLongPnl"
+        },
+        "statusField": "longPosition",
+        "layer": 3
+      },
+      "price": {
+        "label": "价格",
+        "noun": "价格",
+        "shape": "meter",
+        "color": "gold",
+        "box": [
+          875,
+          315,
+          170,
+          170
+        ],
+        "labelPlacement": "above",
+        "value": {
+          "field": "rise",
+          "prefix": "+",
+          "suffix": " 美元"
+        },
+        "layer": 2
+      }
+    },
+    "clauses": [
+      {
+        "id": "left",
+        "text": "左边的永续合约，报价一百零一美元。",
+        "heading": "一空一多 怎样对冲",
+        "focus": "left",
+        "visible": [
+          "left"
+        ],
+        "coverage": [
+          {
+            "text": "左边的永续合约",
+            "kind": "entity",
+            "object": "left",
+            "action": "show-left"
+          },
+          {
+            "text": "，报价一百零一美元。",
+            "kind": "action",
+            "action": "quote-left"
+          }
+        ],
+        "relations": [],
+        "camera": {
+          "x": 650,
+          "y": 540,
+          "zoom": 1.04
+        }
+      },
+      {
+        "id": "right",
+        "text": "右边的现货，报价一百美元。",
+        "heading": "一空一多 怎样对冲",
+        "focus": "right",
+        "visible": [
+          "left",
+          "right"
+        ],
+        "coverage": [
+          {
+            "text": "右边的现货",
+            "kind": "entity",
+            "object": "right",
+            "action": "show-right"
+          },
+          {
+            "text": "，报价一百美元。",
+            "kind": "action",
+            "action": "quote-right"
+          }
+        ],
+        "relations": [
+          {
+            "from": "left",
+            "to": "right",
+            "type": "compares"
+          }
+        ],
+        "camera": {
+          "x": 960,
+          "y": 540,
+          "zoom": 0.95
+        }
+      },
+      {
+        "id": "short",
+        "text": "机器人先发出空单，在左边成交。",
+        "heading": "一空一多 怎样对冲",
+        "focus": "robot",
+        "visible": [
+          "left",
+          "right",
+          "robot",
+          "short"
+        ],
+        "coverage": [
+          {
+            "text": "机器人",
+            "kind": "entity",
+            "object": "robot",
+            "action": "show-robot"
+          },
+          {
+            "text": "先发出空单",
+            "kind": "entity",
+            "object": "short",
+            "action": "issue-short"
+          },
+          {
+            "text": "，在左边成交。",
+            "kind": "action",
+            "action": "sell"
+          }
+        ],
+        "relations": [
+          {
+            "from": "robot",
+            "to": "left",
+            "type": "executes"
+          },
+          {
+            "from": "left",
+            "to": "right",
+            "type": "compares"
+          },
+          {
+            "from": "robot",
+            "to": "short",
+            "type": "produces"
+          }
+        ],
+        "camera": {
+          "x": 870,
+          "y": 540,
+          "zoom": 1
+        }
+      },
+      {
+        "id": "long",
+        "text": "随后发出多单，在右边买入。",
+        "heading": "一空一多 怎样对冲",
+        "focus": "long",
+        "visible": [
+          "left",
+          "right",
+          "robot",
+          "short",
+          "long"
+        ],
+        "coverage": [
+          {
+            "text": "随后发出多单",
+            "kind": "entity",
+            "object": "long",
+            "action": "issue-long"
+          },
+          {
+            "text": "，在右边买入。",
+            "kind": "action",
+            "action": "buy"
+          }
+        ],
+        "relations": [
+          {
+            "from": "robot",
+            "to": "long",
+            "type": "produces"
+          },
+          {
+            "from": "robot",
+            "to": "short",
+            "type": "produces"
+          },
+          {
+            "from": "left",
+            "to": "short",
+            "type": "contains"
+          },
+          {
+            "from": "right",
+            "to": "long",
+            "type": "contains"
+          }
+        ],
+        "camera": {
+          "x": 1060,
+          "y": 540,
+          "zoom": 1
+        }
+      },
+      {
+        "id": "positions",
+        "text": "两笔仓位同时保留，一空一多。",
+        "heading": "一空一多 怎样对冲",
+        "focus": "short",
+        "visible": [
+          "short",
+          "long"
+        ],
+        "coverage": [
+          {
+            "text": "两笔仓位",
+            "kind": "action",
+            "action": "leave-market"
+          },
+          {
+            "text": "同时保留，",
+            "kind": "action",
+            "action": "focus-short"
+          },
+          {
+            "text": "一空一多。",
+            "kind": "action",
+            "action": "focus-long"
+          }
+        ],
+        "relations": [
+          {
+            "from": "short",
+            "to": "long",
+            "type": "compares"
+          }
+        ],
+        "camera": {
+          "x": 960,
+          "y": 580,
+          "zoom": 1.05
+        }
+      },
+      {
+        "id": "rise",
+        "text": "假设价格一起上涨两美元。",
+        "heading": "一空一多 怎样对冲",
+        "focus": "price",
+        "visible": [
+          "short",
+          "long",
+          "price"
+        ],
+        "coverage": [
+          {
+            "text": "假设价格",
+            "kind": "entity",
+            "object": "price",
+            "action": "show-price"
+          },
+          {
+            "text": "一起上涨两美元。",
+            "kind": "action",
+            "action": "rise-two"
+          }
+        ],
+        "relations": [
+          {
+            "from": "price",
+            "to": "short",
+            "type": "produces"
+          },
+          {
+            "from": "price",
+            "to": "long",
+            "type": "produces"
+          }
+        ],
+        "camera": {
+          "x": 960,
+          "y": 530,
+          "zoom": 1.03
+        }
+      },
+      {
+        "id": "offset",
+        "text": "多单赚两美元，空单亏两美元。",
+        "heading": "一空一多 怎样对冲",
+        "focus": "long",
+        "visible": [
+          "short",
+          "long",
+          "price"
+        ],
+        "coverage": [
+          {
+            "text": "多单",
+            "kind": "entity",
+            "object": "long"
+          },
+          {
+            "text": "赚两美元，",
+            "kind": "action",
+            "action": "long-gains"
+          },
+          {
+            "text": "空单",
+            "kind": "entity",
+            "object": "short"
+          },
+          {
+            "text": "亏两美元。",
+            "kind": "action",
+            "action": "short-loses"
+          }
+        ],
+        "relations": [
+          {
+            "from": "price",
+            "to": "short",
+            "type": "produces"
+          },
+          {
+            "from": "price",
+            "to": "long",
+            "type": "produces"
+          }
+        ],
+        "camera": {
+          "x": 960,
+          "y": 530,
+          "zoom": 1.03
+        }
+      },
+      {
+        "id": "neutral",
+        "text": "一赚一亏相互抵消，方向风险降低。",
+        "heading": "一空一多 怎样对冲",
+        "focus": "short",
+        "visible": [
+          "short",
+          "long"
+        ],
+        "coverage": [
+          {
+            "text": "一赚一亏",
+            "kind": "action",
+            "action": "leave-price"
+          },
+          {
+            "text": "相互抵消，",
+            "kind": "action",
+            "action": "offset"
+          },
+          {
+            "text": "方向风险降低。",
+            "kind": "action",
+            "action": "close"
+          }
+        ],
+        "relations": [
+          {
+            "from": "short",
+            "to": "long",
+            "type": "offsets"
+          }
+        ],
+        "camera": {
+          "x": 960,
+          "y": 550,
+          "zoom": 1.06
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "show-left",
+        "kind": "reveal",
+        "cue": "left",
+        "targets": [
+          "left"
+        ],
+        "duration": 0.5
+      },
+      {
+        "id": "quote-left",
+        "kind": "change",
+        "cue": "quote_left",
+        "targets": [
+          "left"
+        ],
+        "duration": 0.4,
+        "effects": {
+          "showLeft": {
+            "from": 0,
+            "to": 1
+          }
+        }
+      },
+      {
+        "id": "show-right",
+        "kind": "reveal",
+        "cue": "right",
+        "targets": [
+          "right"
+        ],
+        "duration": 0.5
+      },
+      {
+        "id": "quote-right",
+        "kind": "change",
+        "cue": "quote_right",
+        "targets": [
+          "right"
+        ],
+        "duration": 0.4,
+        "effects": {
+          "showRight": {
+            "from": 0,
+            "to": 1
+          }
+        }
+      },
+      {
+        "id": "show-robot",
+        "kind": "reveal",
+        "cue": "short",
+        "targets": [
+          "robot"
+        ],
+        "duration": 0.5
+      },
+      {
+        "id": "issue-short",
+        "kind": "reveal",
+        "cue": "emit_short",
+        "targets": [
+          "short"
+        ],
+        "duration": 0.3
+      },
+      {
+        "id": "sell",
+        "kind": "transfer",
+        "cue": "emit_short",
+        "targets": [
+          "short"
+        ],
+        "duration": 0.7630434782608704,
+        "delay": 0.3,
+        "source": "robot",
+        "destination": "left",
+        "after": [
+          "show-robot",
+          "issue-short"
+        ],
+        "effects": {
+          "shortPosition": {
+            "from": 0,
+            "to": 1
+          }
+        }
+      },
+      {
+        "id": "issue-long",
+        "kind": "reveal",
+        "cue": "emit_long",
+        "targets": [
+          "long"
+        ],
+        "duration": 0.3,
+        "requires": {
+          "shortPosition": 1
+        },
+        "after": [
+          "sell"
+        ]
+      },
+      {
+        "id": "buy",
+        "kind": "transfer",
+        "cue": "emit_long",
+        "targets": [
+          "long"
+        ],
+        "duration": 0.8119565217391329,
+        "delay": 0.3,
+        "source": "robot",
+        "destination": "right",
+        "after": [
+          "issue-long",
+          "sell"
+        ],
+        "requires": {
+          "shortPosition": 1
+        },
+        "effects": {
+          "longPosition": {
+            "from": 0,
+            "to": 1
+          }
+        }
+      },
+      {
+        "id": "leave-market",
+        "kind": "exit",
+        "cue": "positions",
+        "targets": [
+          "left",
+          "right",
+          "robot"
+        ],
+        "duration": 0.4
+      },
+      {
+        "id": "focus-short",
+        "kind": "move",
+        "cue": "positions",
+        "targets": [
+          "short"
+        ],
+        "duration": 1.15,
+        "delay": 0.45,
+        "fromBox": [
+          460,
+          570,
+          180,
+          100
+        ],
+        "toBox": [
+          395,
+          500,
+          330,
+          190
+        ],
+        "after": [
+          "leave-market"
+        ],
+        "reason": "保留原空单身份，放大并移入当前比较区域"
+      },
+      {
+        "id": "focus-long",
+        "kind": "move",
+        "cue": "positions",
+        "targets": [
+          "long"
+        ],
+        "duration": 1.15,
+        "delay": 0.45,
+        "fromBox": [
+          1280,
+          570,
+          180,
+          100
+        ],
+        "toBox": [
+          1195,
+          500,
+          330,
+          190
+        ],
+        "after": [
+          "leave-market"
+        ],
+        "reason": "保留原多单身份，两笔仓位共用稳定比较基线"
+      },
+      {
+        "id": "show-price",
+        "kind": "reveal",
+        "cue": "rise",
+        "targets": [
+          "price"
+        ],
+        "duration": 0.5
+      },
+      {
+        "id": "rise-two",
+        "kind": "change",
+        "cue": "price_rise",
+        "targets": [
+          "price"
+        ],
+        "duration": 1.1,
+        "effects": {
+          "rise": {
+            "from": 0,
+            "to": 2
+          }
+        },
+        "requires": {
+          "shortPosition": 1,
+          "longPosition": 1
+        }
+      },
+      {
+        "id": "long-gains",
+        "kind": "change",
+        "cue": "long_pnl",
+        "targets": [
+          "long"
+        ],
+        "duration": 0.65,
+        "effects": {
+          "showLongPnl": {
+            "from": 0,
+            "to": 1
+          }
+        }
+      },
+      {
+        "id": "short-loses",
+        "kind": "change",
+        "cue": "short_pnl",
+        "targets": [
+          "short"
+        ],
+        "duration": 0.65,
+        "effects": {
+          "showShortPnl": {
+            "from": 0,
+            "to": 1
+          }
+        }
+      },
+      {
+        "id": "leave-price",
+        "kind": "exit",
+        "cue": "neutral",
+        "targets": [
+          "price"
+        ],
+        "duration": 0.45
+      },
+      {
+        "id": "offset",
+        "kind": "connect",
+        "cue": "net",
+        "targets": [
+          "short",
+          "long"
+        ],
+        "duration": 1,
+        "valueField": "netPnl",
+        "requires": {
+          "shortPosition": 1,
+          "longPosition": 1
+        },
+        "after": [
+          "short-loses",
+          "long-gains"
+        ]
+      },
+      {
+        "id": "close",
+        "kind": "exit",
+        "cue": "closing",
+        "targets": [
+          "short",
+          "long"
+        ],
+        "duration": 0.6,
+        "delay": 1.35,
+        "after": [
+          "offset"
+        ]
+      }
+    ],
+    "model": {
+      "initial": {
+        "showLeft": 0,
+        "showRight": 0,
+        "shortPosition": 0,
+        "longPosition": 0,
+        "rise": 0,
+        "showLongPnl": 0,
+        "showShortPnl": 0
+      },
+      "derived": {
+        "leftPrice": [
+          "+",
+          101,
+          "rise"
+        ],
+        "rightPrice": [
+          "+",
+          100,
+          "rise"
+        ],
+        "shortPnl": [
+          "*",
+          -1,
+          [
+            "*",
+            "shortPosition",
+            "rise"
+          ]
+        ],
+        "longPnl": [
+          "*",
+          "longPosition",
+          "rise"
+        ],
+        "netPnl": [
+          "+",
+          "shortPnl",
+          "longPnl"
+        ],
+        "netPosition": [
+          "-",
+          "longPosition",
+          "shortPosition"
+        ]
+      },
+      "invariants": [
+        {
+          "name": "两笔相反仓位必须并存且等量",
+          "after": "buy",
+          "expression": "netPosition",
+          "equals": 0
+        },
+        {
+          "name": "共同价格变动的盈亏抵消",
+          "after": "buy",
+          "expression": "netPnl",
+          "equals": 0
+        }
+      ]
+    },
+    "sounds": [
+      {
+        "action": "sell",
+        "phase": "end",
+        "src": "sfx/short-fill.wav",
+        "relativeDb": -9
+      },
+      {
+        "action": "buy",
+        "phase": "end",
+        "src": "sfx/hedge-lock.wav",
+        "relativeDb": -9
+      },
+      {
+        "action": "offset",
+        "phase": "end",
+        "src": "sfx/truth-confirm.wav",
+        "relativeDb": -11
+      }
+    ]
+  },
+  "props": {
+    "title": "一空一多 怎样对冲",
+    "audioSrc": "narration.mp3",
+    "leadFrames": 18,
+    "playbackRate": 0.92,
+    "durationInFrames": 810,
+    "cues": {
+      "left": 871.7391304347826,
+      "right": 4284.782608695652,
+      "short": 7143.478260869565,
+      "long": 10393.478260869564,
+      "positions": 13208.695652173912,
+      "rise": 16284.782608695652,
+      "offset": 19110.869565217392,
+      "neutral": 22339.130434782608,
+      "quote_left": 2818.478260869565,
+      "quote_right": 5904.347826086956,
+      "emit_short": 7989.130434782608,
+      "fill_short": 9052.173913043478,
+      "emit_long": 10901.086956521738,
+      "fill_long": 12013.04347826087,
+      "both": 14006.521739130434,
+      "price_rise": 17168.478260869564,
+      "long_pnl": 19110.869565217392,
+      "short_pnl": 20505.434782608696,
+      "net": 23067.391304347824,
+      "closing": 24060.869565217392
+    },
+    "captions": [
+      {
+        "text": "左边的永续合约，报价一百零一美元。",
+        "startMs": 871.7391304347826,
+        "endMs": 3784.782608695652,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "右边的现货，报价一百美元。",
+        "startMs": 4284.782608695652,
+        "endMs": 6628.260869565217,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "机器人先发出空单，在左边成交。",
+        "startMs": 7143.478260869565,
+        "endMs": 9873.91304347826,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "随后发出多单，在右边买入。",
+        "startMs": 10393.478260869564,
+        "endMs": 12689.130434782608,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "两笔仓位同时保留，一空一多。",
+        "startMs": 13208.695652173912,
+        "endMs": 15745.652173913042,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "假设价格一起上涨两美元。",
+        "startMs": 16284.782608695652,
+        "endMs": 18569.565217391304,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "多单赚两美元，空单亏两美元。",
+        "startMs": 19110.869565217392,
+        "endMs": 21803.260869565216,
+        "timestampMs": null,
+        "confidence": null
+      },
+      {
+        "text": "一赚一亏相互抵消，方向风险降低。",
+        "startMs": 22339.130434782608,
+        "endMs": 25289.130434782608,
+        "timestampMs": null,
+        "confidence": null
+      }
+    ]
+  }
+}

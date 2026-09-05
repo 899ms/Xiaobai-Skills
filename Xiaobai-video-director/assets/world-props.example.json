@@ -1,0 +1,111 @@
+{
+  "title": "一次读取怎样经过缓存",
+  "audioSrc": "narration.mp3",
+  "leadFrames": 18,
+  "playbackRate": 0.92,
+  "durationInFrames": 1330,
+  "cues": {
+    "intro": 871.7391304347826,
+    "request": 3415.2173913043475,
+    "probe": 7610.869565217391,
+    "empty": 12795.652173913042,
+    "miss": 15089.130434782608,
+    "found": 18850.0,
+    "store": 22339.130434782608,
+    "repeat": 25915.217391304348,
+    "hit": 28380.434782608696,
+    "direct": 31793.478260869564,
+    "conclusion": 36000.0,
+    "request_enter": 3415.2173913043475,
+    "application": 5045.652173913043,
+    "cache_ask": 9895.652173913044,
+    "cache_empty": 13561.95652173913,
+    "cache_miss": 15463.043478260868,
+    "database_go": 17154.347826086956,
+    "database_found": 18850.0,
+    "cache_fill": 24200.0,
+    "request_repeat": 26450.0,
+    "cache_hit": 30471.73913043478,
+    "direct_return": 32193.478260869564,
+    "shorter_path": 41007.60869565217
+  },
+  "captions": [
+    {
+      "text": "想象一次商品信息读取。",
+      "startMs": 871.7391304347826,
+      "endMs": 2926.086956521739,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "编号零一的请求来到应用，想拿到商品价格。",
+      "startMs": 3415.2173913043475,
+      "endMs": 7073.913043478261,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "应用没有立刻去数据库，而是先问旁边的缓存：这里有结果吗？",
+      "startMs": 7610.869565217391,
+      "endMs": 12263.04347826087,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "第一次，缓存是空的。",
+      "startMs": 12795.652173913042,
+      "endMs": 14559.782608695652,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "这叫缓存未命中，请求继续走到数据库。",
+      "startMs": 15089.130434782608,
+      "endMs": 18361.95652173913,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "数据库找到价格后，结果沿原路返回。",
+      "startMs": 18850.0,
+      "endMs": 21821.73913043478,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "在经过缓存时，它也留一份在缓存里。",
+      "startMs": 22339.130434782608,
+      "endMs": 25407.608695652172,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "现在，相同请求再次到来。",
+      "startMs": 25915.217391304348,
+      "endMs": 28065.217391304348,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "缓存已经有结果，这叫缓存命中。",
+      "startMs": 28380.434782608696,
+      "endMs": 31293.478260869564,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "结果直接从缓存返回，请求不用再走到数据库。",
+      "startMs": 31793.478260869564,
+      "endMs": 35479.34782608695,
+      "timestampMs": null,
+      "confidence": null
+    },
+    {
+      "text": "所以缓存加速的关键，不是让数据库变快，而是让重复读取少走了数据库这一段。",
+      "startMs": 36000.0,
+      "endMs": 42602.17391304348,
+      "timestampMs": null,
+      "confidence": null
+    }
+  ]
+}

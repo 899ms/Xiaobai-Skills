@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "scope": "profile",
+  "profile": "knowledge-explainer",
+  "rules": [
+    {
+      "id": "single-meaning-object",
+      "symptom": "一个机器人、卡片或容器同时表示多个概念",
+      "rule": "每个对象只绑定一个口播名词；任务、角色、结果和原因分别建模",
+      "enforcement": "gate+release",
+      "v2Review": "score-review+score-release"
+    },
+    {
+      "id": "exact-spoken-label-binding",
+      "symptom": "口播说代码，画面却标成项目，观众需要二次翻译",
+      "rule": "对象声明 spokenTerm；可见主标签只能等于或直接缩写自该口播名词",
+      "enforcement": "gate+release",
+      "v2Review": "score-review+score-release"
+    },
+    {
+      "id": "direct-metaphor",
+      "symptom": "抽象名词被画成无直觉含义的门形、曲线或信息卡",
+      "rule": "优先使用观众无需解释即可识别的实物、状态和动作；陌生隐喻必须先做局部样片",
+      "enforcement": "qa-gate+release",
+      "v2Review": "score-review+score-release"
+    },
+    {
+      "id": "typed-object-relations",
+      "symptom": "多个元素只是并排摆放，看不出谁属于谁、谁作用于谁",
+      "rule": "每个辅助对象必须通过包含、连接、修改、附着、存入或对照关系连接当前主角",
+      "enforcement": "gate+release",
+      "v2Review": "score-review+score-release"
+    },
+    {
+      "id": "state-derived-result",
+      "symptom": "结果作为新图形凭空出现，与产生结果的对象没有因果",
+      "rule": "口播描述某对象留下、变成或更新结果时，优先让原对象发生可见状态变化",
+      "enforcement": "gate+release",
+      "v2Review": "score-review+score-release"
+    },
+    {
+      "id": "attention-isolation",
+      "symptom": "当前重点出现时，旧对象仍占据画面并竞争注意力",
+      "rule": "结论句使用隔离注意力；无关对象退出，必要上下文降级且与主角建立关系",
+      "enforcement": "gate+release",
+      "v2Review": "score-review+score-release"
+    },
+    {
+      "id": "causal-transition-process",
+      "symptom": "画面只给出前后两个完成态，观众看不到对象怎样发生变化",
+      "rule": "状态改变与对象流转必须展示触发、可辨认的中间过程和落定结果；淡入淡出、换标签或瞬间替换不能单独充当过程",
+      "enforcement": "gate+qa-gate+release",
+      "v2Review": "score-review+score-release"
+    }
+  ]
+}

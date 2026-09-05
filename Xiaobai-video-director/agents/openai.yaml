@@ -1,0 +1,4 @@
+interface:
+  display_name: "Xiaobai 视频导演 v2.0"
+  short_description: "通过导演 Profile 独立制作带配音字幕的 Remotion 视频"
+  default_prompt: "使用 $xiaobai-video-director，为我选择合适的导演 Profile 并制作带配音和字幕的视频；沿用已确认偏好，只在选择会显著改变成片时询问我。"

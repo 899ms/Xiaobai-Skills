@@ -1,0 +1,260 @@
+{
+  "version": 1,
+  "events": {
+    "probeBeat": {
+      "cue": "probe"
+    },
+    "emptyBeat": {
+      "cue": "empty"
+    },
+    "foundBeat": {
+      "cue": "found"
+    },
+    "repeatBeat": {
+      "cue": "repeat"
+    },
+    "hideDatabase": {
+      "cue": "repeat",
+      "offsetSec": -1.5
+    },
+    "hitApproach": {
+      "cue": "hit"
+    },
+    "directBeat": {
+      "cue": "direct"
+    },
+    "showApp": {
+      "cue": "intro"
+    },
+    "spawnFirst": {
+      "cue": "request_enter"
+    },
+    "showCache": {
+      "cue": "cache_ask"
+    },
+    "cacheEmpty": {
+      "cue": "cache_empty"
+    },
+    "cacheMiss": {
+      "cue": "cache_miss"
+    },
+    "showDatabase": {
+      "cue": "database_go"
+    },
+    "databaseFound": {
+      "cue": "database_found"
+    },
+    "cacheFilled": {
+      "cue": "cache_fill"
+    },
+    "spawnSecond": {
+      "cue": "request_repeat"
+    },
+    "cacheHit": {
+      "cue": "cache_hit"
+    },
+    "directReturn": {
+      "cue": "direct_return"
+    },
+    "conclusion": {
+      "cue": "conclusion"
+    }
+  },
+  "sounds": {},
+  "motions": {
+    "firstEnter": {
+      "from": "outsideApp",
+      "to": "appInbox",
+      "start": {
+        "cue": "request_enter"
+      },
+      "end": {
+        "cue": "application",
+        "offsetSec": 0.75
+      },
+      "semantic": {
+        "action": "arrive",
+        "targetNode": "app",
+        "targetReceptor": "inbox"
+      }
+    },
+    "firstToCache": {
+      "from": "appInbox",
+      "to": "cache",
+      "start": {
+        "cue": "cache_ask"
+      },
+      "end": {
+        "cue": "cache_empty",
+        "offsetSec": -0.35
+      },
+      "semantic": {
+        "action": "transfer",
+        "sourceNode": "app",
+        "sourceReceptor": "inbox",
+        "targetNode": "cache",
+        "targetReceptor": "query"
+      }
+    },
+    "firstToDatabase": {
+      "from": "cache",
+      "to": "databasePort",
+      "start": {
+        "cue": "database_go"
+      },
+      "end": {
+        "cue": "database_found"
+      },
+      "semantic": {
+        "action": "transfer",
+        "sourceNode": "cache",
+        "sourceReceptor": "query",
+        "targetNode": "database",
+        "targetReceptor": "query"
+      }
+    },
+    "firstBackCache": {
+      "from": "databasePort",
+      "to": "cache",
+      "start": {
+        "cue": "database_found",
+        "offsetSec": 0.5
+      },
+      "end": {
+        "cue": "cache_fill"
+      },
+      "semantic": {
+        "action": "transfer",
+        "sourceNode": "database",
+        "sourceReceptor": "query",
+        "targetNode": "cache",
+        "targetReceptor": "query"
+      }
+    },
+    "firstBackApp": {
+      "from": "cache",
+      "to": "appInbox",
+      "start": {
+        "cue": "cache_fill"
+      },
+      "end": {
+        "cue": "repeat",
+        "offsetSec": -0.25
+      },
+      "semantic": {
+        "action": "transfer",
+        "sourceNode": "cache",
+        "sourceReceptor": "query",
+        "targetNode": "app",
+        "targetReceptor": "inbox"
+      }
+    },
+    "secondToCache": {
+      "from": "appInbox",
+      "to": "cache",
+      "start": {
+        "cue": "hit"
+      },
+      "end": {
+        "cue": "cache_hit"
+      },
+      "semantic": {
+        "action": "transfer",
+        "sourceNode": "app",
+        "sourceReceptor": "inbox",
+        "targetNode": "cache",
+        "targetReceptor": "query"
+      }
+    },
+    "secondBackApp": {
+      "from": "cache",
+      "to": "appInbox",
+      "start": {
+        "cue": "direct_return"
+      },
+      "end": {
+        "cue": "direct_return",
+        "offsetSec": 1.45
+      },
+      "semantic": {
+        "action": "transfer",
+        "sourceNode": "cache",
+        "sourceReceptor": "query",
+        "targetNode": "app",
+        "targetReceptor": "inbox"
+      }
+    },
+    "secondEnter": {
+      "from": "outsideApp",
+      "to": "appInbox",
+      "start": {
+        "cue": "request_repeat"
+      },
+      "end": {
+        "cue": "hit",
+        "offsetSec": -0.35
+      },
+      "semantic": {
+        "action": "arrive",
+        "targetNode": "app",
+        "targetReceptor": "inbox"
+      }
+    }
+  },
+  "camera": [
+    {
+      "atSec": 0,
+      "x": 420,
+      "zoom": 1.2
+    },
+    {
+      "cue": "cache_ask",
+      "offsetSec": -0.5,
+      "x": 420,
+      "zoom": 1.2
+    },
+    {
+      "cue": "cache_empty",
+      "x": 685,
+      "zoom": 1.12
+    },
+    {
+      "cue": "database_go",
+      "x": 930,
+      "zoom": 1.12
+    },
+    {
+      "cue": "database_found",
+      "offsetSec": 0.7,
+      "x": 930,
+      "zoom": 1.12
+    },
+    {
+      "cue": "cache_fill",
+      "x": 960,
+      "zoom": 1.08
+    },
+    {
+      "cue": "repeat",
+      "x": 650,
+      "zoom": 1.17
+    },
+    {
+      "cue": "cache_hit",
+      "x": 720,
+      "zoom": 1.15
+    },
+    {
+      "cue": "direct_return",
+      "offsetSec": 1.5,
+      "x": 620,
+      "zoom": 1.15
+    },
+    {
+      "cue": "conclusion",
+      "offsetSec": 1,
+      "x": 960,
+      "zoom": 0.94
+    }
+  ]
+}
